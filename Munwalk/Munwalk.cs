@@ -4,7 +4,7 @@ using UnityEngine;
 namespace nubeees_MunWalk
 {
     //[KSPAddon(KSPAddon.Startup.Flight, false)]
-    public class MunWalk : VesselModule
+    public class Munwalk : VesselModule
     {
         // Fields
         bool walktoggle = false;
