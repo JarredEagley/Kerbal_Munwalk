@@ -416,58 +416,6 @@ namespace nubeees_MunWalk
         }
 
 
-        /// <summary>
-        /// Raycast thing i dont entirely understand to be honest.
-        /// </summary>
-        /// <param name="rayLength"></param>
-        /// <param name="rayObject"></param>
-        /// <param name="direction"></param>
-        /// <param name="hit"></param>
-        /// <returns></returns>
-        private bool RayCast (float rayLength, GameObject rayObject, Vector3 direction, out RaycastHit hit)
-        {
-            var ray = new Ray(rayObject.transform.position, direction);
-            int tempLayerMask = ~layerMask;
-            return Physics.Raycast(ray, out hit, rayLength, tempLayerMask);
-        }
 
-        // Converts radians to degrees.
-        private double radToDeg (double rad)
-        {
-            return rad * (180 / Math.PI);
-        }
-
-        // Gets angle between vecs.
-        private double VectorAngle (Vector3d vec1, Vector3d vec2)
-        {
-            // Get the dot product. Dot product will be the numerator.
-            double dot = 0;
-            dot += (vec1.x * vec2.x);
-            dot += (vec1.y * vec2.y);
-            dot += (vec1.z * vec2.z);
-
-            // Get the denominator.
-            double denom = VectorNorm(vec1) * VectorNorm(vec2);
-
-            return Math.Acos(dot/denom);
-        }
-
-        // Gets vector's norm.
-        private double VectorNorm (Vector3d vec)
-        {
-            return Math.Sqrt((vec.x * vec.x) + (vec.y * vec.y) + (vec.z * vec.z));
-        }
-
-        private void calculateAverageAccel ()
-        {
-            // Get the mean for all elements of the accel array + the accel field.
-            AVGaccel.Zero();
-            for (int i = 0; i < accelarray.Length; i++)
-            {
-                AVGaccel += accelarray[i];
-            }
-            AVGaccel += accel;
-            AVGaccel /= accelarray.Length+1;
-        }
     }
 }
