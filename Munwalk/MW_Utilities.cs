@@ -25,13 +25,17 @@ namespace Munwalk
             return Physics.Raycast(ray, out hit, rayLength, tempLayerMask);
         }
 
-        // Converts radians to degrees.
+
+        /** Takes an angle in radians and returns the equivalent angle in degrees.
+         */
         protected double radToDeg(double rad)
         {
             return rad * (180 / Math.PI);
         }
 
-        // Gets angle between vecs.
+
+        /** Returns the angle between two given vectors.
+         */
         protected double VectorAngle(Vector3d vec1, Vector3d vec2)
         {
             // Get the dot product. Dot product will be the numerator.
@@ -46,7 +50,9 @@ namespace Munwalk
             return Math.Acos(dot / denom);
         }
 
-        // Gets vector's norm.
+        /** Returns the norm of a given vector.
+         * 
+         */
         protected double VectorNorm(Vector3d vec)
         {
             return Math.Sqrt((vec.x * vec.x) + (vec.y * vec.y) + (vec.z * vec.z));
@@ -65,8 +71,8 @@ namespace Munwalk
         // }
 
 
-        /**
-         * Given an array of vectors, calculate the average vector.
+        /** Given an array of vectors, calculate the average vector.
+         * 
          */
         protected Vector3d AverageVector(Vector3d[] vectorArray)
         {
