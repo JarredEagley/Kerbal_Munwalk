@@ -236,5 +236,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="UnityEngine.dll" Version="1.0.0"/>
+    <PackageReference Include="UnityEngine" Version="1.0.0"/>
   </ItemGroup>
 </Project>

@@ -45,6 +45,7 @@ namespace nubeees_MunWalk
             _kerbal = this.GetComponent<KerbalEVA>();
             _vessel = this.GetComponent<Vessel>();
 
+
             // Define debug lines.
             //_line = lineObj.AddComponent<LineRenderer>();                     uncomment me for accel lines
 
@@ -67,6 +68,7 @@ namespace nubeees_MunWalk
             // Make sure these operations are being run on kerbals only.
             if (_kerbal != null)
             {
+
                 // Update slow counter:
                 if (updateCounter > 12)
                 {
@@ -201,10 +203,20 @@ namespace nubeees_MunWalk
             // TO-DO
         }
 
-        private void getNearbyParts()
-        {
-            // TO-DO
-        }
+        // A few experimental WIP functions //
+
+        // private void getNearbyParts()
+        // {
+        //     // TO-DO
+        // }
+        // private void getNearestPart()
+        // {
+        //     // TO-DO
+        // }
+        // private void getNearestVessel()
+        // {
+        //     // TO-DO
+        // }
 
 
         /** Orients the kerbal to align with a supplied 'up' direction vector.
