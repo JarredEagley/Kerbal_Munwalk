@@ -50,19 +50,19 @@ namespace nubeees_MunWalk
 
             // If we've got a kerbal, Add the munwalk componenet
             if (_kerbal != null)
-            { 
+            {
                 _vessel.rootPart.Modules.Add(new MunWalk_Part());
             }
         }
 
 
-    int updateCounter = 0; // Update counter
-    bool MWActive = false; // Keeps track of whether or not 'walking' is active or not.
+        int updateCounter = 0; // Update counter
+        bool MWActive = false; // Keeps track of whether or not 'walking' is active or not.
 
-    /** FixedUpdate
-    * "Called every physics frame and anything physics or game related should happen here."
-    */
-    public void FixedUpdate()
+        /** FixedUpdate
+        * "Called every physics frame and anything physics or game related should happen here."
+        */
+        public void FixedUpdate()
         {
             // Make sure these operations are being run on kerbals only.
             if (_kerbal != null)
@@ -86,8 +86,8 @@ namespace nubeees_MunWalk
                 if (updateCounter % 3 == 2)
                 {
                     handleAccelerationCalculationFrame();
-                } 
-                
+                }
+
             }
             updateCounter++;
         }
@@ -122,53 +122,53 @@ namespace nubeees_MunWalk
         }
 
 
-        private void handleForceApplicationFrame() 
+        private void handleForceApplicationFrame()
         {
 
-                // It might not be able to find your kerbal, so nullcheck   note to self: remove this unneeded nullcheck!!!
-                if (_kerbal != null)
+            // It might not be able to find your kerbal, so nullcheck   note to self: remove this unneeded nullcheck!!!
+            if (_kerbal != null)
+            {
+                // "Oops I tripped"
+                if (_kerbal.isRagdoll)
                 {
-                    // "Oops I tripped"
-                    if (_kerbal.isRagdoll)
-                    {
-                        walktoggle = false;
-                    }
-                    // No standing in >5g allowed
-                    if (accel.magnitude > 49)
-                    {
-                        walktoggle = false;
-                    }
+                    walktoggle = false;
+                }
+                // No standing in >5g allowed
+                if (accel.magnitude > 49)
+                {
+                    walktoggle = false;
+                }
 
-                    // Stuff to do when you use the 'O' toggle.
-                    if (walktoggle)
-                    {
-                        MWActive = true;
+                // Stuff to do when you use the 'O' toggle.
+                if (walktoggle)
+                {
+                    MWActive = true;
                     // Handle Movement.
-       /*             try
-                    {
-                        if (updateCounter == 6 && _vessel == FlightGlobals.ActiveVessel)
-                        {
-                            moveKerbal();
-                        }
-                    }
-                    catch
-                    {
-                        // Give orientation a chance to catch up!
-                        Debug.LogWarning("input error while trying to move kerbal.");
-                    }*/
+                    /*             try
+                                 {
+                                     if (updateCounter == 6 && _vessel == FlightGlobals.ActiveVessel)
+                                     {
+                                         moveKerbal();
+                                     }
+                                 }
+                                 catch
+                                 {
+                                     // Give orientation a chance to catch up!
+                                     Debug.LogWarning("input error while trying to move kerbal.");
+                                 }*/
 
                     // Try to orient Kerbal to accel
                     orientKerbal(accel);
-                    }
-
-                    // If still active but walktoggle is off, set active to false, stop any animations.
-                    /*if (MWActive && !walktoggle)
-                    {
-                        MWActive = false;
-                        _anim.Stop()
-                            //_kerbal.fsm.StartFSM("Ragdoll");
-                        }*/
                 }
+
+                // If still active but walktoggle is off, set active to false, stop any animations.
+                /*if (MWActive && !walktoggle)
+                {
+                    MWActive = false;
+                    _anim.Stop()
+                        //_kerbal.fsm.StartFSM("Ragdoll");
+                    }*/
+            }
 
         }
 
@@ -196,10 +196,20 @@ namespace nubeees_MunWalk
             }
         }
 
+        private void calculateAverageAccel()
+        {
+            // TO-DO
+        }
+
+        private void getNearbyParts()
+        {
+            // TO-DO
+        }
+
 
         /** Orients the kerbal to align with a supplied 'up' direction vector.
          */
-        public void orientKerbal (Vector3d inputVector)
+        public void orientKerbal(Vector3d inputVector)
         {
             // Make kerbal 'float'
             // TO-DO: change this to simply be an un-ragdoll.
@@ -221,7 +231,7 @@ namespace nubeees_MunWalk
         }
 
         // Called every 10 frames of the update method!
-        private void updateSlow ()
+        private void updateSlow()
         {
 
         }
@@ -235,7 +245,7 @@ namespace nubeees_MunWalk
             if (walktoggle == false)
                 walktoggle = true;
             else
-                walktoggle = false; 
+                walktoggle = false;
         }
 
 
