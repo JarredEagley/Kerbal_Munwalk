@@ -86,5 +86,88 @@ namespace Munwalk
             avgVector /= vectorArray.Length;
             return avgVector;
         }
+
+        /// <summary>
+        /// Thank you to RoverDude and anyone else involved with writing LogisticsTools.cs for this function!
+        /// </summary>
+        /// <param name="a">A 'Vessel' object.</param>
+        /// <param name="b">A 'Vessel' object.</param>
+        /// <returns>The distance between the two input vessels.</returns>
+        public static double GetRange(Vessel a, Vessel b)
+        {
+            var posCur = a.GetWorldPos3D();
+            var posNext = b.GetWorldPos3D();
+            return Vector3d.Distance(posCur, posNext);
+        }
+
+        /// <summary>
+        /// Thank you to RoverDude for having this function in his USITools repo! It is exactly what I needed! ☺
+        /// Returns a list of nearby vessels.
+        /// </summary>
+        /// <param name="range"></param>
+        /// <param name="includeSelf"></param>
+        /// <param name="thisVessel">The current vessel to run the search from.</param>
+        /// <returns>A list of nearby vessels.</returns>
+        public static List<Vessel> GetNearbyVessels(float range, bool includeSelf, Vessel thisVessel)
+        {
+            try
+            {
+                var vesselList = new List<Vessel>();
+                var vesselCount = FlightGlobals.Vessels.Count;
+                for (int i = 0; i < vesselCount; ++i)
+                {
+                    var v = FlightGlobals.Vessels[i];
+                    if (v == thisVessel && !includeSelf)
+                    {
+                        continue;
+                    }
+                    if (GetRange(thisVessel, v) < range)
+                    {
+                        vesselList.Add(v);
+                    }
+                }
+                return vesselList;
+            }
+            catch (Exception ex)
+            {
+                Debug.Log(String.Format("[KMW] - ERROR in GetNearbyVessels ", ex.Message));
+                return new List<Vessel>();
+            }
+        }
+
+        /// <summary>
+        /// An extension of GetNearbyVessels, but instead returns a dictionary with the vessels as key sand their distances from the current vessel as a value.
+        /// </summary>
+        /// <param name="range"></param>
+        /// <param name="includeSelf"></param>
+        /// <param name="thisVessel"></param>
+        /// <returns>Dictionary of form {Vessel, vessel's distance as a double}</returns>
+        public static Dictionary<Vessel, double> GetNearbyVesselRanges(float range, bool includeSelf, Vessel thisVessel)
+        {
+            try
+            {
+                var vesselDict = new Dictionary<Vessel, double>();
+                var vesselCount = FlightGlobals.Vessels.Count;
+                for (int i = 0; i < vesselCount; ++i)
+                {
+                    var v = FlightGlobals.Vessels[i];
+                    if (v == thisVessel && !includeSelf)
+                    {
+                        continue;
+                    }
+                    var _getrange = GetRange(thisVessel, v);
+                    if (_getrange < range)
+                    {
+                        vesselDict.Add(v, _getrange);
+                    }
+                }
+                return vesselDict;
+            }
+            catch (Exception ex)
+            {
+                Debug.Log(String.Format("[KMW] - ERROR in GetNearbyVesselRanges ", ex.Message));
+                return new Dictionary<Vessel, double>();
+            }
+        }
     }
 }
