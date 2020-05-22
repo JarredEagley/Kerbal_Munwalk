@@ -26,7 +26,6 @@ namespace Munwalk
         //     return Physics.Raycast(ray, out hit, rayLength, tempLayerMask);
         // }
 
-
         /// <summary>
         /// Given an angle in radians return the equivalent angle in degrees.
         /// </summary>
@@ -166,5 +165,17 @@ namespace Munwalk
                 return new Dictionary<Vessel, double>();
             }
         }
+
+        public static Vessel GetNearestVessel(float range, Vessel thisVessel)
+        {
+            // TO-DO
+        }
+
+        public static void GetNearestPart()
+        {
+            // TO-DO
+        }
     }
+
+
 }
