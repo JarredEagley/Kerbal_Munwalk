@@ -143,31 +143,31 @@ namespace nubeees_MunWalk
                     if (walktoggle)
                     {
                         MWActive = true;
-                        // Handle Movement.
-                        try
+                    // Handle Movement.
+       /*             try
+                    {
+                        if (updateCounter == 6 && _vessel == FlightGlobals.ActiveVessel)
                         {
-                            if (updateCounter == 6 && _vessel == FlightGlobals.ActiveVessel)
-                            {
-                                moveKerbal();
-                            }
+                            moveKerbal();
                         }
-                        catch
-                        {
-                            // Give orientation a chance to catch up!
-                            Debug.LogWarning("input error while trying to move kerbal.");
-                        }
+                    }
+                    catch
+                    {
+                        // Give orientation a chance to catch up!
+                        Debug.LogWarning("input error while trying to move kerbal.");
+                    }*/
 
-                        // Try to orient Kerbal to accel
-                        orientKerbal();
+                    // Try to orient Kerbal to accel
+                    orientKerbal(accel);
                     }
 
                     // If still active but walktoggle is off, set active to false, stop any animations.
-                    if (MWActive && !walktoggle)
+                    /*if (MWActive && !walktoggle)
                     {
                         MWActive = false;
                         _anim.Stop()
                             //_kerbal.fsm.StartFSM("Ragdoll");
-                        }
+                        }*/
                 }
 
         }
