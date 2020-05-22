@@ -196,18 +196,20 @@ namespace nubeees_MunWalk
             }
         }
 
-        // (update method helper)
-        // Orient kerbal based on acceleration.
-        public void orientKerbal ()
+
+        /** Orients the kerbal to align with a supplied 'up' direction vector.
+         */
+        public void orientKerbal (Vector3d inputVector)
         {
             // Make kerbal 'float'
+            // TO-DO: change this to simply be an un-ragdoll.
             _kerbal.fsm.StartFSM("Idle (Floating)");
 
             // Try to orient correctly if not in freefal.
-            if (accel.magnitude > .5)
+            if (inputVector.magnitude > .5)
             {
                 // Note: 8 is good for 1g
-                Vector3 Angularvel = (Vector3.Cross(_kerbal.transform.up, AVGaccel.normalized) * ((float)AVGaccel.magnitude)) * 0.5f;
+                Vector3 Angularvel = (Vector3.Cross(_kerbal.transform.up, inputVector.normalized) * ((float)inputVector.magnitude)) * 0.5f;
                 if (Angularvel.magnitude > 50)
                 {
                     Angularvel /= 10;
