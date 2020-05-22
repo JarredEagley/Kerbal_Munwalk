@@ -67,19 +67,6 @@ namespace Munwalk
             return Math.Sqrt((vec.x * vec.x) + (vec.y * vec.y) + (vec.z * vec.z));
         }
 
-        //protected Vector3d calculateAverageAccel(Vector3d AVGaccel)
-        //{
-        //    // Get the mean for all elements of the accel array + the accel field.
-        //    AVGaccel.Zero();
-        //    for (int i = 0; i < accelarray.Length; i++)
-        //    {
-        //        AVGaccel += accelarray[i];
-        //    }
-        //    AVGaccel += accel;
-        //    AVGaccel /= accelarray.Length + 1;
-        // }
-
-
         /// <summary>
         /// Given an array of vectors, calculate the vector which averages between them.
         /// </summary>
