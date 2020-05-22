@@ -6,9 +6,9 @@ using UnityEngine;
 
 namespace Munwalk
 {
-    /**
-     *  Provides some useful methods for utility.
-     */
+    /// <summary>
+    /// Class which provides some useful methods used in Kerbal Munwalk
+    /// </summary>
     public class MW_Utilities
     {
         /// <summary>
@@ -19,25 +19,31 @@ namespace Munwalk
         /// <param name="direction"></param>
         /// <param name="hit"></param>
         /// <returns></returns>
-        protected bool RayCast(float rayLength, GameObject rayObject, Vector3 direction, out RaycastHit hit)
-        {
-            var ray = new Ray(rayObject.transform.position, direction);
-            int tempLayerMask = ~layerMask;
-            return Physics.Raycast(ray, out hit, rayLength, tempLayerMask);
-        }
+        // protected bool RayCast(float rayLength, GameObject rayObject, Vector3 direction, out RaycastHit hit)
+        // {
+        //     var ray = new Ray(rayObject.transform.position, direction);
+        //     int tempLayerMask = ~layerMask;
+        //     return Physics.Raycast(ray, out hit, rayLength, tempLayerMask);
+        // }
 
 
-        /** Takes an angle in radians and returns the equivalent angle in degrees.
-         */
-        protected double radToDeg(double rad)
+        /// <summary>
+        /// Given an angle in radians return the equivalent angle in degrees.
+        /// </summary>
+        /// <param name="rad"></param>
+        /// <returns></returns>
+        public static double radToDeg(double rad)
         {
             return rad * (180 / Math.PI);
         }
 
-
-        /** Returns the angle between two given vectors.
-         */
-        protected double VectorAngle(Vector3d vec1, Vector3d vec2)
+        /// <summary>
+        /// Return the angle between two input vectors.
+        /// </summary>
+        /// <param name="vec1"></param>
+        /// <param name="vec2"></param>
+        /// <returns></returns>
+        public static double VectorAngle(Vector3d vec1, Vector3d vec2)
         {
             // Get the dot product. Dot product will be the numerator.
             double dot = 0;
@@ -51,10 +57,12 @@ namespace Munwalk
             return Math.Acos(dot / denom);
         }
 
-        /** Returns the norm of a given vector.
-         * 
-         */
-        protected double VectorNorm(Vector3d vec)
+        /// <summary>
+        /// Return the norm of a given vector.
+        /// </summary>
+        /// <param name="vec"></param>
+        /// <returns></returns>
+        public static double VectorNorm(Vector3d vec)
         {
             return Math.Sqrt((vec.x * vec.x) + (vec.y * vec.y) + (vec.z * vec.z));
         }
@@ -72,9 +80,11 @@ namespace Munwalk
         // }
 
 
-        /** Given an array of vectors, calculate the average vector.
-         * 
-         */
+        /// <summary>
+        /// Given an array of vectors, calculate the vector which averages between them.
+        /// </summary>
+        /// <param name="vectorArray"></param>
+        /// <returns></returns>
         protected Vector3d AverageVector(Vector3d[] vectorArray)
         {
             // Get the mean for all elements of the accel array + the accel field.
