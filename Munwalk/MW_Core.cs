@@ -64,123 +64,137 @@ namespace nubeees_MunWalk
     */
     public void FixedUpdate()
         {
-            // Make sure these operations are being ran on kerbals only.
+            // Make sure these operations are being run on kerbals only.
             if (_kerbal != null)
             {
-                // Update slow:
+                // Update slow counter:
                 if (updateCounter > 12)
                 {
                     updateSlow();
                     updateCounter = 0;
                 }
 
-                // Toggle with context menu button.
-                MunWalk_Part partmod = _kerbal.part.FindModuleImplementing<MunWalk_Part>();
-                walktoggle = partmod.getActive_MW();
-                airplanetoggle = partmod.getActive_AM();
-                // Todo: Rename the airplanemode class to munwalkpart module or something like that...
-
-                // drag handling:
-                if (airplanetoggle)
-                {
-                    _kerbal.vessel.rootPart.dragModel = Part.DragModel.NONE;
-                }
-                else
-                {
-                    _kerbal.vessel.rootPart.dragModel = Part.DragModel.CUBE;
-                }
-
-                //Debug.Log(""+_vessel.situation.ToString());           log the vessel's situation
-
-                // Handle force unragdoll button's action...
-                if (partmod.forceunragdoll)
-                {
-                    
-                    _kerbal.isRagdoll = false;
-                    _kerbal.fsm.StartFSM("Idle (Floating)");
-                    //partmod.resetForceUnragdoll();            attempt at forcing unragdoll... It didn't work :(
-                }
+                handleButtonActions();
 
                 // Force application frames:
                 if (updateCounter % 3 == 0)
                 {
-                    // It might not be able to find your kerbal, so nullcheck   note to self: remove this unneeded nullcheck!!!
-                    if (_kerbal != null)
-                    {
-                        // "Oops I tripped"
-                        if (_kerbal.isRagdoll)
-                        {
-                            walktoggle = false;
-                        }
-                        // No standing in >5g allowed
-                        if (accel.magnitude > 49)
-                        {
-                            walktoggle = false;
-                        }
-
-                        // Stuff to do when you use the 'O' toggle.
-                        if (walktoggle)
-                        {
-                            MWActive = true;
-                            // Handle Movement.
-                            try
-                            {
-                                if (updateCounter == 6 && _vessel == FlightGlobals.ActiveVessel)
-                                {
-                                    moveKerbal();
-                                }
-                            }
-                            catch
-                            {
-                                // Give orientation a chance to catch up!
-                                Debug.LogWarning("input error while trying to move kerbal.");
-                            }
-
-                            // Try to orient Kerbal to accel
-                            orientKerbal();
-                        }
-
-                        // If still active but walktoggle is off, set active to false, stop any animations.
-                        if (MWActive && !walktoggle)
-                        {
-                            MWActive = false;
-                            _anim.Stop()
-                            //_kerbal.fsm.StartFSM("Ragdoll");
-                        }
-                    }
-                } // End of force application
-
+                    handleForceApplicationFrame();
+                }
 
                 // Accel checking frames:
                 if (updateCounter % 3 == 2)
                 {
-                    // Nullcheck for the kerbal.
-                    if (_kerbal != null)
-                    {
-                        // Calculate accel for this frame.
-                        Vector3 trueaccel = _kerbal.vessel.acceleration_immediate;
-                        // When in freefall, we don't want to account for gravity.
-                        accel = trueaccel - _kerbal.vessel.graviticAcceleration;
-
-                        // Store this accel vector to be averaged next round.
-                        //accelold2 = accelold1;
-                        for (int i = accelarray.Length - 1; i > 0; i--)
-                        {
-                            accelarray[i] = accelarray[i - 1];
-                        }
-                        //accelold1 = accel;
-                        accelarray[0] = accel;
-
-                        // Calculate averaged acceleration.
-                        calculateAverageAccel();
-                    }
-                } // End of accel checking.
+                    handleAccelerationCalculationFrame();
+                } 
                 
-                // End of kerbal checking
             }
             updateCounter++;
         }
 
+        /** Handles the actions taken when the context menu buttons are pressed.
+         */
+        private void handleButtonActions()
+        {
+            // Toggle with context menu button.
+            MunWalk_Part partmod = _kerbal.part.FindModuleImplementing<MunWalk_Part>();
+            walktoggle = partmod.getActive_MW();
+            airplanetoggle = partmod.getActive_AM();
+
+            // drag handling:
+            if (airplanetoggle)
+            {
+                _kerbal.vessel.rootPart.dragModel = Part.DragModel.NONE;
+            }
+            else
+            {
+                _kerbal.vessel.rootPart.dragModel = Part.DragModel.CUBE;
+            }
+
+            // Handle force unragdoll button's action...
+            if (partmod.forceunragdoll)
+            {
+
+                _kerbal.isRagdoll = false;
+                _kerbal.fsm.StartFSM("Idle (Floating)");
+                //partmod.resetForceUnragdoll();            attempt at forcing unragdoll... It didn't work :(
+            }
+        }
+
+
+        private void handleForceApplicationFrame() 
+        {
+
+                // It might not be able to find your kerbal, so nullcheck   note to self: remove this unneeded nullcheck!!!
+                if (_kerbal != null)
+                {
+                    // "Oops I tripped"
+                    if (_kerbal.isRagdoll)
+                    {
+                        walktoggle = false;
+                    }
+                    // No standing in >5g allowed
+                    if (accel.magnitude > 49)
+                    {
+                        walktoggle = false;
+                    }
+
+                    // Stuff to do when you use the 'O' toggle.
+                    if (walktoggle)
+                    {
+                        MWActive = true;
+                        // Handle Movement.
+                        try
+                        {
+                            if (updateCounter == 6 && _vessel == FlightGlobals.ActiveVessel)
+                            {
+                                moveKerbal();
+                            }
+                        }
+                        catch
+                        {
+                            // Give orientation a chance to catch up!
+                            Debug.LogWarning("input error while trying to move kerbal.");
+                        }
+
+                        // Try to orient Kerbal to accel
+                        orientKerbal();
+                    }
+
+                    // If still active but walktoggle is off, set active to false, stop any animations.
+                    if (MWActive && !walktoggle)
+                    {
+                        MWActive = false;
+                        _anim.Stop()
+                            //_kerbal.fsm.StartFSM("Ragdoll");
+                        }
+                }
+
+        }
+
+        private void handleAccelerationCalculationFrame()
+        {
+            // Nullcheck for the kerbal.
+            if (_kerbal != null)
+            {
+                // Calculate accel for this frame.
+                Vector3 trueaccel = _kerbal.vessel.acceleration_immediate;
+                // When in freefall, we don't want to account for gravity.
+                accel = trueaccel - _kerbal.vessel.graviticAcceleration;
+
+                // Store this accel vector to be averaged next round.
+                //accelold2 = accelold1;
+                for (int i = accelarray.Length - 1; i > 0; i--)
+                {
+                    accelarray[i] = accelarray[i - 1];
+                }
+                //accelold1 = accel;
+                accelarray[0] = accel;
+
+                // Calculate averaged acceleration.
+                calculateAverageAccel();
+            }
+        }
 
         // (update method helper)
         // Orient kerbal based on acceleration.
