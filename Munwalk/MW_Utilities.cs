@@ -214,12 +214,62 @@ namespace Munwalk
             }
         }
 
+        // public static Vector3d getPartWorldPosition(Part part)
+        // {
+        //     var rootVessel = part.vessel;
+        //     var vesselPos = rootVessel.GetWorldPos3D();
 
+        //     var partReletivePosition = part.partTransform.localToWorldMatrix;
+
+        //     return new Vector3d();
+        // }
+
+        /// <summary>
+        /// Given a current vessel and another vessel, locates the part in otherVessel closest to thisVessel.
+        /// </summary>
+        /// <param name="thisVessel"></param>
+        /// <param name="otherVessel"></param>
+        /// <returns>The nearest part. new Part() if failiure.</returns>
         public static Part GetNearestPart(Vessel thisVessel, Vessel otherVessel)
         {
-            // Iterate through the other vessel's parts
+            // Iterate through the other vessel's parts. Check each part's distance to thisVessel. Return the closest part.
+            try
+            {
+                var nearestPart = new Part();
+                double nearestPartDist = -1.0;
+                var partCount = otherVessel.parts.Count;
+                for (int i = 0; i < partCount; ++i)
+                {
+                    var p = otherVessel.Parts[i];
 
+                    // No range check needed, two vessels supplied.
 
+                    // var _getrange = GetVesselRange(thisVessel, v);
+                    // Pretty much the GetRange function but adapted to measure distance between a part and a vessel.
+                    // It's a bit niche and also pretty simple so I'm not separating it into its own function...
+                    var _getrange = Vector3d.Distance(thisVessel.GetWorldPos3D(), p.partTransform.position); // TO-DO: Figure out if this is actually doing what I want it to do...
+
+                    // Unique case for the first loop.
+                    if (nearestPartDist < 0.0)
+                    {
+                        nearestPart = p;
+                        nearestPartDist = _getrange;
+                    }
+                    // Check if vessel v is closer than the current nearestVessel
+                    if (nearestPartDist < _getrange)
+                    {
+                        nearestPart = p;
+                        nearestPartDist = _getrange;
+                    }
+
+                }
+                return nearestPart;
+            }
+            catch (Exception ex)
+            {
+                Debug.Log(String.Format("[KMW] - ERROR in GetNearestPart ", ex.Message));
+                return new Part();
+            }
         }
     }
 
