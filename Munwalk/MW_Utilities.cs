@@ -104,7 +104,7 @@ namespace Munwalk
         /// <param name="includeSelf"></param>
         /// <param name="thisVessel">The current vessel to run the search from.</param>
         /// <returns>A list of nearby vessels.</returns>
-        public static List<Vessel> GetNearbyVessels(float range, bool includeSelf = false, Vessel thisVessel)
+        public static List<Vessel> GetNearbyVessels(float range, Vessel thisVessel, bool includeSelf = false)
         {
             try
             {
@@ -138,7 +138,7 @@ namespace Munwalk
         /// <param name="includeSelf"></param>
         /// <param name="thisVessel"></param>
         /// <returns>Dictionary of form {Vessel, vessel's distance as a double}</returns>
-        public static Dictionary<Vessel, double> GetNearbyVesselRanges(float range, bool includeSelf = false, Vessel thisVessel)
+        public static Dictionary<Vessel, double> GetNearbyVesselRanges(float range, Vessel thisVessel, bool includeSelf = false)
         {
             try
             {
