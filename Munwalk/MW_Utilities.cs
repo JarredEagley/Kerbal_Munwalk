@@ -214,9 +214,12 @@ namespace Munwalk
             }
         }
 
-        public static void GetNearestPart()
+
+        public static Part GetNearestPart(Vessel thisVessel, Vessel otherVessel)
         {
-            // TO-DO
+
+
+
         }
     }
 
