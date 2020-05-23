@@ -89,7 +89,7 @@ namespace Munwalk
         /// <param name="a">A 'Vessel' object.</param>
         /// <param name="b">A 'Vessel' object.</param>
         /// <returns>The distance between the two input vessels.</returns>
-        public static double GetRange(Vessel a, Vessel b)
+        public static double GetVesselRange(Vessel a, Vessel b)
         {
             var posCur = a.GetWorldPos3D();
             var posNext = b.GetWorldPos3D();
@@ -117,7 +117,7 @@ namespace Munwalk
                     {
                         continue;
                     }
-                    if (GetRange(thisVessel, v) < range)
+                    if (GetVesselRange(thisVessel, v) < range)
                     {
                         vesselList.Add(v);
                     }
@@ -151,7 +151,7 @@ namespace Munwalk
                     {
                         continue;
                     }
-                    var _getrange = GetRange(thisVessel, v);
+                    var _getrange = GetVesselRange(thisVessel, v);
                     if (_getrange < range)
                     {
                         vesselDict.Add(v, _getrange);
@@ -188,7 +188,7 @@ namespace Munwalk
                         continue;
                     }
                     // Ensure vessel is in range. 
-                    var _getrange = GetRange(thisVessel, v);
+                    var _getrange = GetVesselRange(thisVessel, v);
                     if (_getrange < range)
                     {
                         // Unique case for the first loop.
@@ -217,7 +217,7 @@ namespace Munwalk
 
         public static Part GetNearestPart(Vessel thisVessel, Vessel otherVessel)
         {
-
+            // Iterate through the other vessel's parts
 
 
         }
