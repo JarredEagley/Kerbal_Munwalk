@@ -8,6 +8,7 @@ namespace Munwalk
 {
     /// <summary>
     /// Class which encapsilates the line game object and its renderer game object for convenience.
+    /// The line renderer will be left public for further convenience. This class just boxes it up with the GameObject.
     /// </summary>
     public class MW_ArrowGenerator
     {
@@ -50,7 +51,6 @@ namespace Munwalk
             this.lineRenderer.endWidth = endWidth;
 
         }
-
 
         // ORIGINAL LINE STUFF FOR REFERENCE
         //_line.useWorldSpace = false;
