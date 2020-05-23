@@ -46,6 +46,7 @@ namespace nubeees_MunWalk
             _vessel = this.GetComponent<Vessel>();
 
 
+
             // Define debug lines.
             //_line = lineObj.AddComponent<LineRenderer>();                     uncomment me for accel lines
 

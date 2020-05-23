@@ -12,8 +12,7 @@ namespace Munwalk
     public class MW_ArrowGenerator
     {
         private GameObject lineObj = new GameObject("Line");
-        private LineRenderer lineRenderer;
-
+        public LineRenderer lineRenderer;
 
         public MW_ArrowGenerator(Vector3d initialTransform, bool useWorldSpace = false, Vector3? endPosition = null, Color? startColor = null, Color? endColor = null, float startWidth = 1, float endWidth = 0)
         {
@@ -44,7 +43,7 @@ namespace Munwalk
 
             this.lineRenderer.transform.localPosition = initialTransform;
             this.lineRenderer.useWorldSpace = useWorldSpace;
-            this.lineRenderer.SetPosition(1, (Vector3)endPosition)
+            this.lineRenderer.SetPosition(1, (Vector3)endPosition);
 
             this.lineRenderer.startColor = (Color)startColor;
             this.lineRenderer.endColor = (Color)endColor;
