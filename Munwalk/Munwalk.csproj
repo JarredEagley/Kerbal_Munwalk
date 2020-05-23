@@ -1,11 +1,12 @@
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+﻿<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3AB3938E-394A-4AA9-8324-5F56929A12A8}</ProjectGuid>
     <OutputType>Library</OutputType>
+    <OutputPath>bin</OutputPath>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Munwalk</RootNamespace>
     <AssemblyName>Munwalk</AssemblyName>
@@ -37,12 +38,12 @@
     <Reference Include="Assembly-CSharp-firstpass">
       <HintPath>..\..\..\KSP_x64_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
     </Reference>
-    <Reference Include="System"/>
-    <Reference Include="System.Core"/>
-    <Reference Include="System.Xml.Linq"/>
-    <Reference Include="System.Data.DataSetExtensions"/>
-    <Reference Include="System.Data"/>
-    <Reference Include="System.Xml"/>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
     <Reference Include="UnityEngine">
       <HintPath>..\..\..\KSP_x64_Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
@@ -228,14 +229,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MW_AirplaneMode.cs"/>
-    <Compile Include="MW_Utilities.cs"/>
-    <Compile Include="MW_Core.cs"/>
-    <Compile Include="Properties\AssemblyInfo.cs"/>
-    <None Include="MW_Core.cs.OLD"/>
+    <Compile Include="MW_AirplaneMode.cs" />
+    <Compile Include="MW_DebugArrow.cs" />
+    <Compile Include="MW_Utilities.cs" />
+    <Compile Include="MW_Core.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="MW_Core.cs.OLD" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="UnityEngine.dll" Version="1.0.0"/>
-    <PackageReference Include="UnityEngine" Version="1.0.0"/>
+    <PackageReference Include="UnityEngine.dll" Version="1.0.0" />
+    <PackageReference Include="UnityEngine" Version="1.0.0" />
   </ItemGroup>
 </Project>

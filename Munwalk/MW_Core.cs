@@ -17,6 +17,8 @@ namespace nubeees_MunWalk
         // Average across an array of vectors, to smooth out the target vector.
         Vector3d[] accelarray = new Vector3d[5];
 
+        MW_ArrowGenerator debugArrow;
+
         // Weird thing I don't quite understand for raycasting.
         // public int layerMask = 0;
 
@@ -47,6 +49,8 @@ namespace nubeees_MunWalk
                 _vessel.rootPart.Modules.Add(new MunWalk_Part());
             }
 
+            debugArrow = new MW_ArrowGenerator(_vessel.CoM);
+
         }
 
 
@@ -58,6 +62,10 @@ namespace nubeees_MunWalk
         */
         public void FixedUpdate()
         {
+            Debug.Log("KERBAL MUNWALK FIXED UPDATE");
+            debugArrow.lineRenderer.transform.localPosition = _vessel.CoM;
+            debugArrow.lineRenderer.SetPosition(1, _vessel.acceleration);
+
             // Make sure these operations are being run on kerbals only.
             if (_kerbal != null)
             {
