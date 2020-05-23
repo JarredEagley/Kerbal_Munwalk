@@ -166,16 +166,51 @@ namespace Munwalk
             }
         }
 
+        /// <summary>
+        /// Gets the vessel closest to thisVessel in a given range. This should be slightly faster than searching the vessel: range dictionary.
+        /// </summary>
+        /// <param name="range"></param>
+        /// <param name="thisVessel"></param>
+        /// <returns>The closest vessel. Will return thisVessel if there is a failure of any kind.</returns>
         public static Vessel GetNearestVessel(float range, Vessel thisVessel)
         {
-            // TO-DO
             try
             {
-                GetNearestVessel = thisVessel;
+                var nearestVessel = thisVessel;
+                double nearestVesselDist = -1.0;
+                var vesselCount = FlightGlobals.Vessels.Count;
+                for (int i = 0; i < vesselCount; ++i)
+                {
+                    var v = FlightGlobals.Vessels[i];
+                    // Skip if its the current vessel.
+                    if (v == thisVessel)
+                    {
+                        continue;
+                    }
+                    // Ensure vessel is in range. 
+                    var _getrange = GetRange(thisVessel, v);
+                    if (_getrange < range)
+                    {
+                        // Unique case for the first loop.
+                        if (nearestVesselDist < 0.0)
+                        {
+                            nearestVessel = v;
+                            nearestVesselDist = _getrange;
+                        }
+                        // Check if vessel v is closer than the current nearestVessel
+                        if (nearestVesselDist < _getrange)
+                        {
+                            nearestVessel = v;
+                            nearestVesselDist = _getrange;
+                        }
+                    }
+                }
+                return nearestVessel;
             }
             catch (Exception ex)
             {
-
+                Debug.Log(String.Format("[KMW] - ERROR in GetNearestVessel ", ex.Message));
+                return thisVessel;
             }
         }
 
