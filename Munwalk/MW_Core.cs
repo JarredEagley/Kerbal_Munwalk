@@ -23,16 +23,17 @@ namespace nubeees_MunWalk
 
 
         // Weird thing I don't quite understand for raycasting.
-        public int layerMask = 0;
+        // public int layerMask = 0;
 
-        /** Start method.
-         * 
-         * "Called once and is where any setup or “on-spawn” code should go. This method runs when your 
-         * class spawns into the correct scene and runs before all other methods (except Awake()). Note 
-         * that all Start() methods that need to run in a scene run sequentially, if you are trying to 
-         * reference another object it may not exist yet and could require using a Coroutine to delay 
-         * running some of your code."
-         */
+
+        /// <summary>
+        /// Start() Method for the plugin.
+        ///   "Called once and is where any setup or “on-spawn” code should go. This method runs when your 
+        ///   class spawns into the correct scene and runs before all other methods(except Awake()). Note
+        ///   that all Start() methods that need to run in a scene run sequentially, if you are trying to 
+        ///   reference another object it may not exist yet and could require using a Coroutine to delay
+        ///   running some of your code."
+        /// </summary>
         public void Start()
         {
             // Set all vectors to zero to start with.
@@ -44,11 +45,6 @@ namespace nubeees_MunWalk
             // Define vessel and kerbal.
             _kerbal = this.GetComponent<KerbalEVA>();
             _vessel = this.GetComponent<Vessel>();
-
-
-
-            // Define debug lines.
-            //_line = lineObj.AddComponent<LineRenderer>();                     uncomment me for accel lines
 
             // If we've got a kerbal, Add the munwalk componenet
             if (_kerbal != null)
