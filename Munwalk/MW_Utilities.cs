@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace Munwalk
+namespace nubeees_MunWalk
 {
     /// <summary>
     /// Class which provides some useful methods used in Kerbal Munwalk

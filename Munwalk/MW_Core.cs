@@ -17,11 +17,6 @@ namespace nubeees_MunWalk
         // Average across an array of vectors, to smooth out the target vector.
         Vector3d[] accelarray = new Vector3d[5];
 
-        // Line stuff.
-        GameObject lineObj = new GameObject("Line");
-        LineRenderer _line;
-
-
         // Weird thing I don't quite understand for raycasting.
         // public int layerMask = 0;
 
@@ -51,6 +46,7 @@ namespace nubeees_MunWalk
             {
                 _vessel.rootPart.Modules.Add(new MunWalk_Part());
             }
+
         }
 
 

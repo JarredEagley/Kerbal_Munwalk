@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace Munwalk
+namespace nubeees_MunWalk
 {
     /// <summary>
     /// Class which encapsilates the line game object and its renderer game object for convenience.
