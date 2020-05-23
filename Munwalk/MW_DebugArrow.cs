@@ -31,13 +31,11 @@ namespace Munwalk
                 endPosition = new Vector3(0, 0, 0);
             }
 
-            // The other optional parameters.
-            // this.startWidth = startWidth;
-            // this.endWidth = endWidth;
-
-
             // Define the line renderer.
             this.lineRenderer = lineObj.AddComponent<LineRenderer>();
+
+            // Set the material. I don't forsee myself ever needing to change this so it'll stay hardcoded for now.
+            lineRenderer.material = new Material(Shader.Find("Particles/Additive"));
 
             // Apply initial line params.
 
