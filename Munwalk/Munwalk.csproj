@@ -1,16 +1,15 @@
-﻿<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3AB3938E-394A-4AA9-8324-5F56929A12A8}</ProjectGuid>
+    <ProjectGuid>{0A27A54A-CE92-4002-A4F6-BD8C8EFC3922}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <OutputPath>bin</OutputPath>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Munwalk</RootNamespace>
     <AssemblyName>Munwalk</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
@@ -42,6 +41,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine">
@@ -230,14 +230,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MW_AirplaneMode.cs" />
+    <Compile Include="MW_Core.cs" />
     <Compile Include="MW_DebugArrow.cs" />
     <Compile Include="MW_Utilities.cs" />
-    <Compile Include="MW_Core.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <None Include="MW_Core.cs.OLD" />
   </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="UnityEngine.dll" Version="1.0.0" />
-    <PackageReference Include="UnityEngine" Version="1.0.0" />
-  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
